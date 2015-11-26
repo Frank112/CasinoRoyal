@@ -6,8 +6,12 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var mongoose = require('mongoose');
+require('./models/Drinks');
+require('./models/Transactions');
 
-//mongoose.connect('mongodb://localhost/stocks');
+mongoose.connect('mongodb://localhost:27017/stocks');
+
+
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
