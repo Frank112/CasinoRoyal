@@ -2,10 +2,11 @@
 <html>
 <head>
     <title>Casino Royale - Stock prices</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
 </head>
-<body>
+<body ng-app="casino">
 <div class="row">
     <div class="jumbotron col-md-10 col-md-offset-1">
         <h1>Casino Royale</h1>
@@ -20,10 +21,10 @@
         </div>
         <div class="panel-footer"><p>Zeigt die Kurse der letzten 60 Minuten</p></div>
     </div>
-    <div class=" panel panel-default col-md-3 col-md-offset-1">
+    <div class=" panel panel-default col-md-3 col-md-offset-1 col-lg-3 col-lg-offset-1">
         <div class="panel-heading"><h1>Handelspreis</h1></div>
         <div class="panel-body">
-            <h3>Äppler</h3>
+            <h3>{{1 + 1}}</h3>
             <p>Verzehr <span class="label label-success">150</span></p>
             <p>Strafe <span class="label label-danger">300</span></p>
             <h3>Bier</h3>
@@ -35,7 +36,6 @@
             <h3>Daphne</h3>
             <p>Verzehr <span class="label label-success">150</span></p>
             <p>Strafe <span class="label label-danger">300</span></p>
-
         </div>
     </div>
 </div>
@@ -43,9 +43,8 @@
     <div class="panel panel-default col-md-10 col-md-offset-1">
         <div class="panel-heading"><h1>Konsumstatistik</h1></div>
         <div class="panel-body">
-            <div class="row">
-                <div class="col-md-3 col-sm-5 col-lg-2 col-xs-7 box">
-                    <h1>Äppler</h1>
+                <div class="col-lg-2 col-md-2 col-md-offset-1 col-sm-8 col-sm-offset-4  col-xs-7 box">
+                    <h1></h1>
 
                     <p>Konsumiert: </p>
 
@@ -54,49 +53,25 @@
                     <div class="divider"></div>
                     <p>Gesamt: </p>
                 </div>
-                <div class="col-md-3 col-sm-5 col-lg-2 col-xs-7 box">
-                    <h1>Bier</h1>
-
-                    <p>Konsumiert: </p>
-
-                    <p>Bestraft: </p>
-
-                    <p class="divider"></p>
-
-                    <p>Gesamt: </p>
-                </div>
-                <div class="col-md-3 col-sm-5 col-lg-2 col-xs-7 box">
-                    <h1>Schnaps</h1>
-
-                    <p>Konsumiert: </p>
-
-                    <p>Bestraft: </p>
-
-                    <p class="divider"></p>
-
-                    <p>Gesamt: </p>
-                </div>
-                <div class="col-md-3 col-sm-5 col-lg-2 col-xs-7 box">
-                    <h1>Daphne</h1>
-
-                    <p>Konsumiert: </p>
-
-                    <p>Bestraft: </p>
-
-                    <p class="divider"></p>
-
-                    <p>Gesamt: </p>
-                </div>
             </div>
         </div>
-    </div>
 </div>
 </div>
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
 <!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script src="/canvas/canvasjs.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<!-- Bootstrap -->
+<script type="text/javascript" src="js/vendor/bootstrap.min.js"></script>
+
+<!-- Angular -->
+<script type="text/javascript" src="js/vendor/angular.min.js"></script>
+<script type="text/javascript" src="js/angularApp.js"></script>
+
+<!-- canvasjs -->
+<script type="text/javascript" src="js/vendor/canvasjs.min.js"></script>
+
 
 <script type="text/javascript">
 

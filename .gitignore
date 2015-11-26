@@ -1,1 +1,4 @@
 casino-royal/.idea/**/*
+
+casino-royal/mongo_start.sh
+*.log
