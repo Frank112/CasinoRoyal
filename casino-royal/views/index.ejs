@@ -1,69 +1,87 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Casino Royale - Stock price</title>
+    <title>Casino Royale - Stock prices</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="stylesheets/style.css">
 </head>
 <body>
 <div class="row">
-    <div class="panel panel-default col-md-9">
-        <div class="panel-heading"><h1>Dow Jones </h1></div>
-        <div class="panel-body">
-            <div id="chartContainer" style="height: 300px; width: 100%;"></div>
-        </div>
+    <div class="jumbotron col-md-10 col-md-offset-1">
+        <h1>Casino Royale</h1>
+        <p>Kursübersicht und Statistiken</p>
     </div>
-    <div class="panel panel-default col-md-3">
+</div>
+<div class="row">
+    <div class="panel panel-default col-md-6 col-md-offset-1">
+        <div class="panel-heading"><h1>BIX - Bier Index</h1></div>
+        <div class="panel-body">
+            <div id="chartContainer" style="height: 380px; width: 100%;"></div>
+        </div>
+        <div class="panel-footer"><p>Zeigt die Kurse der letzten 60 Minuten</p></div>
+    </div>
+    <div class=" panel panel-default col-md-3 col-md-offset-1">
         <div class="panel-heading"><h1>Handelspreis</h1></div>
         <div class="panel-body">
+            <h3>Äppler</h3>
+            <p>Verzehr <span class="label label-success">150</span></p>
+            <p>Strafe <span class="label label-danger">300</span></p>
+            <h3>Bier</h3>
+            <p>Verzehr <span class="label label-success">150</span></p>
+            <p>Strafe <span class="label label-danger">300</span></p>
+            <h3>Schnaps</h3>
+            <p>Verzehr <span class="label label-success">150</span></p>
+            <p>Strafe <span class="label label-danger">300</span></p>
+            <h3>Daphne</h3>
+            <p>Verzehr <span class="label label-success">150</span></p>
+            <p>Strafe <span class="label label-danger">300</span></p>
 
-            Hier stehen ihre Preise :)
         </div>
     </div>
 </div>
 <div class="row">
-    <div class="panel panel-default col-md-12">
-        <div class="panel-heading"><h1>Saufstatistik</h1></div>
+    <div class="panel panel-default col-md-10 col-md-offset-1">
+        <div class="panel-heading"><h1>Konsumstatistik</h1></div>
         <div class="panel-body">
             <div class="row">
-                <div class="col-md-3 col-sm-5 col-lg-2 col-xs-7">
-                    <h1>Schnaps</h1>
+                <div class="col-md-2 col-md-offset-2 col-sm-5 col-lg-2 col-xs-7 box">
+                    <h1>Äppler</h1>
 
-                    <p>Getrunken: </p>
+                    <p>Konsumiert: </p>
 
-                    <p>Strafen: </p>
+                    <p>Bestraft: </p>
 
                     <div class="divider"></div>
                     <p>Gesamt: </p>
                 </div>
-                <div class="col-md-3  col-sm-5 col-lg-2 col-xs-7">
-                    <h1>Schnaps</h1>
+                <div class="col-md-2 col-md-offset-2  col-sm-5 col-lg-2 col-xs-7 box">
+                    <h1>Bier</h1>
 
-                    <p>Getrunken: </p>
+                    <p>Konsumiert: </p>
 
-                    <p>Strafen: </p>
-
-                    <p class="divider"></p>
-
-                    <p>Gesamt: </p>
-                </div>
-                <div class="col-md-3 col-sm-5 col-lg-2 col-xs-7">
-                    <h1>Schnaps</h1>
-
-                    <p>Getrunken: </p>
-
-                    <p>Strafen: </p>
+                    <p>Bestraft: </p>
 
                     <p class="divider"></p>
 
                     <p>Gesamt: </p>
                 </div>
-                <div class="col-md-3 col-sm-5 col-lg-2 col-xs-7">
+                <div class="col-md-3 col-sm-5 col-lg-2 col-xs-7 box">
                     <h1>Schnaps</h1>
 
-                    <p>Getrunken: </p>
+                    <p>Konsumiert: </p>
 
-                    <p>Strafen: </p>
+                    <p>Bestraft: </p>
+
+                    <p class="divider"></p>
+
+                    <p>Gesamt: </p>
+                </div>
+                <div class="col-md-3 col-sm-5 col-lg-2 col-xs-7 box">
+                    <h1>Daphne</h1>
+
+                    <p>Konsumiert: </p>
+
+                    <p>Bestraft: </p>
 
                     <p class="divider"></p>
 
@@ -81,77 +99,54 @@
 <script src="/canvas/canvasjs.min.js"></script>
 
 <script type="text/javascript">
+
+    var updateInterval = 1000;
+
+    var d = new Date();
+
     window.onload = function () {
-        var chart = new CanvasJS.Chart("chartContainer",
-                {
-                    title:{
-                        text: "Multi-Series Line Chart"
-                    },
-                    data: [
-                        {
-                            type: "line",
-                            dataPoints: [
-                                { x: 10, y: 21 },
-                                { x: 20, y: 25},
-                                { x: 30, y: 20 },
-                                { x: 40, y: 25 },
-                                { x: 50, y: 27 },
-                                { x: 60, y: 28 },
-                                { x: 70, y: 28 },
-                                { x: 80, y: 24 },
-                                { x: 90, y: 26}
+        var dps = [];   //dataPoints.
 
-                            ]
-                        },
-                        {
-                            type: "line",
-                            dataPoints: [
-                                { x: 10, y: 31 },
-                                { x: 20, y: 35},
-                                { x: 30, y: 30 },
-                                { x: 40, y: 35 },
-                                { x: 50, y: 35 },
-                                { x: 60, y: 38 },
-                                { x: 70, y: 38 },
-                                { x: 80, y: 34 },
-                                { x: 90, y: 44}
+        var chart = new CanvasJS.Chart("chartContainer", {
+            title: {
+                text: "BIX Kursübersicht"
+            },
+            axisX: {
+                title: "Uhrzeit",
+            },
+            axisY: {
+                title: "Jones"
+            },
+            data: [{
+                type: "line",
+                dataPoints: dps
+            }]
+        });
 
-                            ]
-                        },
-                        {
-                            type: "line",
-                            dataPoints: [
-                                { x: 10, y: 45 },
-                                { x: 20, y: 50},
-                                { x: 30, y: 40 },
-                                { x: 40, y: 45 },
-                                { x: 50, y: 45 },
-                                { x: 60, y: 48 },
-                                { x: 70, y: 43 },
-                                { x: 80, y: 41 },
-                                { x: 90, y: 28}
+        var xVal = 0;
+        var yVal = 100;
 
-                            ]
-                        },
-                        {
-                            type: "line",
-                            dataPoints: [
-                                { x: 10, y: 71 },
-                                { x: 20, y: 55},
-                                { x: 30, y: 50 },
-                                { x: 40, y: 65 },
-                                { x: 50, y: 95 },
-                                { x: 60, y: 68 },
-                                { x: 70, y: 28 },
-                                { x: 80, y: 34 },
-                                { x: 90, y: 14}
+        var updateChart = function () {
 
-                            ]
-                        }
-                    ]
-                });
+            yVal = yVal + Math.round(5 + Math.random() * (-5 - 5));
+            dps.push({x: xVal, y: yVal,});
+
+            chart.render();
+            xVal++;
+            // update chart after specified time.
+
+            if (dps.length > 36000000) {
+                dps.shift();
+            }
+
+        };
+        setInterval(function () {
+            updateChart()
+        }, updateInterval);
 
         chart.render();
     }
+
+
 </script>
 </html>

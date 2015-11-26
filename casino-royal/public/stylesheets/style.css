@@ -1,3 +1,50 @@
+body{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    background: url('../bg.jpg') top center fixed;
+    background-size: cover !important;
+}
+
+.jumbotron{
+    color: #ffffff;
+    background-color: #232032;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+    opacity: 0.9;
+}
+
+.panel-default {
+    background-color: #3d4c59;
+    border: none;
+    opacity: 0.9;
+    border-radius: 4px;
+}
+
+.panel-default > .panel-heading {
+    border: none;
+    color: #ffffff;
+    background-color: #232032;
+    border-radius: 4px;
+}
+
+.panel-default > .panel-body {
+    border: none;
+    background-color: #3d4c59;
+    color: #ffffff;
+    border-radius: 4px;
+}
+
+.panel-default > .panel-footer {
+    border: none;
+    color: #ffffff;
+    background-color: #232032;
+    border-radius: 4px;
+}
+
 .divider {
     min-height: 2px;
     width: 100%;
@@ -6,4 +53,11 @@
     overflow: hidden;
     background-color: #e5e5e5;
 }
+
+.box {
+    border: 1px solid #ffffff;
+    border-radius: 4px;
+    margin: 10px
+}
+
 
