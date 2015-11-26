@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="css/style.css">
 
 </head>
-<body ng-app="casino">
+<body ng-app="casino" ng-controller="DrinksCtrl as dc">
 <div class="row">
     <div class="jumbotron col-md-10 col-md-offset-1">
         <h1>Casino Royale</h1>
@@ -24,18 +24,11 @@
     <div class=" panel panel-default col-md-3 col-md-offset-1 col-lg-3 col-lg-offset-1">
         <div class="panel-heading"><h1>Handelspreis</h1></div>
         <div class="panel-body">
-            <h3>{{1 + 1}}</h3>
-            <p>Verzehr <span class="label label-success">150</span></p>
-            <p>Strafe <span class="label label-danger">300</span></p>
-            <h3>Bier</h3>
-            <p>Verzehr <span class="label label-success">150</span></p>
-            <p>Strafe <span class="label label-danger">300</span></p>
-            <h3>Schnaps</h3>
-            <p>Verzehr <span class="label label-success">150</span></p>
-            <p>Strafe <span class="label label-danger">300</span></p>
-            <h3>Daphne</h3>
-            <p>Verzehr <span class="label label-success">150</span></p>
-            <p>Strafe <span class="label label-danger">300</span></p>
+            <div ng-repeat="drink in dc.drinks">
+                <h3>{{drink.name}}</h3>
+                <p>Verzehr <span class="label label-success">{{drink.value}}</span></p>
+                <p>Strafe <span class="label label-danger">{{drink.penalty}}</span></p>
+            </div>
         </div>
     </div>
 </div>
@@ -63,14 +56,14 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
 <!-- Bootstrap -->
-<script type="text/javascript" src="js/vendor/bootstrap.min.js"></script>
+<script type="text/javascript" src="javascripts/vendor/bootstrap.min.js"></script>
 
 <!-- Angular -->
-<script type="text/javascript" src="js/vendor/angular.min.js"></script>
-<script type="text/javascript" src="js/angularApp.js"></script>
+<script type="text/javascript" src="javascripts/vendor/angular.min.js"></script>
+<script type="text/javascript" src="javascripts/angularApp.js"></script>
 
 <!-- canvasjs -->
-<script type="text/javascript" src="js/vendor/canvasjs.min.js"></script>
+<script type="text/javascript" src="javascripts/vendor/canvasjs.min.js"></script>
 
 
 <script type="text/javascript">
