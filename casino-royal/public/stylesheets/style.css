@@ -36,6 +36,7 @@ body{
     background-color: #3d4c59;
     color: #ffffff;
     border-radius: 4px;
+    margin: 0 20px 0 20px;
 }
 
 .panel-default > .panel-footer {
@@ -55,7 +56,6 @@ body{
 }
 
 .box {
-    border: 1px solid #ffffff;
     border-radius: 4px;
     margin: 10px
 }
