@@ -6,14 +6,14 @@
     <link rel="stylesheet" href="css/style.css">
 
 </head>
-<body ng-app="casino" ng-controller="DrinksCtrl as dc">
+<body ng-app="casino" ng-controller="DrinksCtrl">
 <div class="row">
     <div class="jumbotron col-md-10 col-md-offset-1">
         <h1>Casino Royale</h1>
         <p>Kursübersicht und Statistiken</p>
     </div>
 </div>
-<div class="row">
+<div class="row" ng-controller="StockCtrl">
     <div class="panel panel-default col-md-6 col-md-offset-1">
         <div class="panel-heading"><h1>BIX - Bier Index</h1></div>
         <div class="panel-body">
@@ -24,10 +24,10 @@
     <div class=" panel panel-default col-md-3 col-md-offset-1 col-lg-3 col-lg-offset-1">
         <div class="panel-heading"><h1>Handelspreis</h1></div>
         <div class="panel-body">
-            <div ng-repeat="drink in dc.drinks">
+            <div ng-repeat="drink in drinks">
                 <h3>{{drink.name}}</h3>
-                <p>Verzehr <span class="label label-success">{{drink.value}}</span></p>
-                <p>Strafe <span class="label label-danger">{{drink.penalty}}</span></p>
+                <p>Verzehr <span class="label label-success">{{drink.value * currentStockValue}}</span></p>
+                <p>Strafe <span class="label label-danger">{{drink.penalty * (1 + (0.5 * (1 - currentStockValue)))}}</span></p>
             </div>
         </div>
     </div>
@@ -92,21 +92,29 @@
         });
 
         var xVal = 0;
-        var yVal = 100;
+        var yVal = 1;
 
         var updateChart = function () {
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange = function(){
+                if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
+                    yVal = JSON.parse(xmlHttp.responseText).value;
+                    dps.push({x: xVal, y: yVal,});
 
-            yVal = yVal + Math.round(5 + Math.random() * (-5 - 5));
-            dps.push({x: xVal, y: yVal,});
+                    angular.element(document.getElementById('chartContainer')).scope().setCurrentStockValue(yVal);
 
-            chart.render();
-            xVal++;
-            // update chart after specified time.
 
-            if (dps.length > 36000000) {
-                dps.shift();
-            }
+                    chart.render();
+                    xVal++;
+                    // update chart after specified time.
 
+                    if (dps.length > 36000000) {
+                        dps.shift();
+                    }
+                }
+            };
+            xmlHttp.open("GET", "http://localhost:3000/currentStockValue", true);
+            xmlHttp.send(null);
         };
         setInterval(function () {
             updateChart()

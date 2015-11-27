@@ -8,12 +8,27 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Casino Royale' });
 });
 
+router.get('/bank', function(req, res, next){
+  res.render('bank', {title: 'Casino Royale - Bank'});
+});
+
 var Drinks = mongoose.model('Drinks');
 var Transactions = mongoose.model('Transactions');
 
-var moneyContingent = 30000;
-var moneyBank = moneyContingent;
-var moneyCirculation = moneyContingent - moneyBank;
+var moneyBank = 30000;
+var moneyCirculation = 0;
+
+var moneyDiff = function(){
+  Transactions.find(function(err, tas){
+    moneyDiff = 0;
+    for(i = 0; i < tas.length; i++){
+      moneyDiff += tas[i].value;
+    }
+    moneyBank += moneyDiff;
+    moneyCirculation -= moneyDiff;
+  });
+}();
+
 
 router.get('/drinks', function(req, res, next) {
   Drinks.find(function(err, drinks){
@@ -46,7 +61,7 @@ router.get('/moneyInfo', function(req, res, next){
 
 router.post('/transaction', function(req, res, next){
   var transaction = new Transactions(req.body);
-
+  moneyDiff += transaction.value;
   transaction.save(function(err, transaction){
     if(err){return next(err);}
 
