@@ -60,4 +60,8 @@ body{
     margin: 10px
 }
 
+input, select, textarea {
+    color: #000000;
+}
+
 

@@ -6,14 +6,14 @@
     <link rel="stylesheet" href="css/style.css">
 
 </head>
-<body ng-app="casino" ng-controller="DrinksCtrl">
+<body ng-app="casino" ng-controller="Controller">
 <div class="row">
     <div class="jumbotron col-md-10 col-md-offset-1">
         <h1>Casino Royale</h1>
         <p>Kursübersicht und Statistiken</p>
     </div>
 </div>
-<div class="row" ng-controller="StockCtrl">
+<div class="row">
     <div class="panel panel-default col-md-6 col-md-offset-1">
         <div class="panel-heading"><h1>BIX - Bier Index</h1></div>
         <div class="panel-body">
@@ -26,8 +26,8 @@
         <div class="panel-body">
             <div ng-repeat="drink in drinks">
                 <h3>{{drink.name}}</h3>
-                <p>Verzehr <span class="label label-success">{{drink.value * currentStockValue}}</span></p>
-                <p>Strafe <span class="label label-danger">{{drink.penalty * (1 + (0.5 * (1 - currentStockValue)))}}</span></p>
+                <p>Verzehr <span class="label label-success">{{(drink.value * currentStockValue) | moneyRound}}</span></p>
+                <p>Strafe <span class="label label-danger">{{(drink.penalty * (1 + (0.5 * (1 - currentStockValue)))) | moneyRound}}</span></p>
             </div>
         </div>
     </div>
@@ -36,15 +36,15 @@
     <div class="panel panel-default col-md-10 col-md-offset-1">
         <div class="panel-heading"><h1>Konsumstatistik</h1></div>
         <div class="panel-body">
-                <div class="col-lg-2 col-md-2 col-md-offset-1 col-sm-8 col-sm-offset-4  col-xs-7 box">
-                    <h1></h1>
+                <div class="col-lg-2 col-md-2 col-md-offset-1 col-sm-8 col-sm-offset-4  col-xs-7 box" ng-repeat="drink in drinks">
+                    <h1>{{drink.name}}</h1>
 
-                    <p>Konsumiert: </p>
+                    <p>Konsumiert: {{getStatisticValue(drink).value}}</p>
 
-                    <p>Bestraft: </p>
+                    <p>Bestraft: {{getStatisticValue(drink).penalty}}</p>
 
                     <div class="divider"></div>
-                    <p>Gesamt: </p>
+                    <p>Gesamt: {{getStatisticValue(drink).value + getStatisticValue(drink).penalty}}</p>
                 </div>
             </div>
         </div>
@@ -68,7 +68,7 @@
 
 <script type="text/javascript">
 
-    var updateInterval = 1000;
+    var updateInterval = 10000;
 
     var d = new Date();
 
@@ -118,6 +118,14 @@
         };
         setInterval(function () {
             updateChart()
+        }, updateInterval);
+
+        var updateStatistics = function(){
+            angular.element(document.getElementById('chartContainer')).scope().updateStatistics();
+        };
+
+        setInterval(function(){
+            updateStatistics()
         }, updateInterval);
 
         chart.render();
