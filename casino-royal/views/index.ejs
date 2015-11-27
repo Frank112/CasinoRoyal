@@ -9,25 +9,32 @@
 <body ng-app="casino" ng-controller="Controller">
 <div class="row">
     <div class="jumbotron col-md-10 col-md-offset-1">
-        <h1>Casino Royale</h1>
+        <h2>Casino Royale</h2>
+
         <p>Kursübersicht und Statistiken</p>
     </div>
 </div>
 <div class="row">
     <div class="panel panel-default col-md-6 col-md-offset-1">
-        <div class="panel-heading"><h1>BIX - Bier Index</h1></div>
+        <div class="panel-heading"><h1>Dow Jones</h1></div>
         <div class="panel-body">
             <div id="chartContainer" style="height: 380px; width: 100%;"></div>
         </div>
-        <div class="panel-footer"><p>Zeigt die Kurse der letzten 60 Minuten</p></div>
+        <div class="panel-footer"><p>Zeigt den Kurs der letzten 60 Minuten</p></div>
     </div>
     <div class=" panel panel-default col-md-3 col-md-offset-1 col-lg-3 col-lg-offset-1">
-        <div class="panel-heading"><h1>Handelspreis</h1></div>
+        <div class="panel-heading"><h1>Handelspreis</h1><p>Grün: Verzehr, Rot: Strafe</p></div>
         <div class="panel-body">
             <div ng-repeat="drink in drinks">
-                <h3>{{drink.name}}</h3>
-                <p>Verzehr <span class="label label-success">{{(drink.value * currentStockValue) | moneyRound}}</span></p>
-                <p>Strafe <span class="label label-danger">{{(drink.penalty * (1 + (0.5 * (1 - currentStockValue)))) | moneyRound}}</span></p>
+                <h4>{{drink.name}}</h4>
+                <div class="row">
+                    <div class="col-md-4">
+                        <h2><span class="label label-success">{{(drink.value * currentStockValue) | moneyRound}}</span></h2>
+                    </div>
+                    <div class="col-md-4 col-md-offset-4">
+                        <h2><span class="label label-danger">{{(drink.penalty * (1 + 0.5 * (1 - currentStockValue))) | moneyRound}}</span></h2>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -36,19 +43,19 @@
     <div class="panel panel-default col-md-10 col-md-offset-1">
         <div class="panel-heading"><h1>Konsumstatistik</h1></div>
         <div class="panel-body">
-                <div class="col-lg-2 col-md-2 col-md-offset-1 col-sm-8 col-sm-offset-4  col-xs-7 box" ng-repeat="drink in drinks">
-                    <h1>{{drink.name}}</h1>
+            <div class="col-lg-2 col-md-2 col-md-offset-1 col-sm-8 col-sm-offset-4  col-xs-7 box"
+                 ng-repeat="drink in drinks">
+                <h1>{{drink.name}}</h1>
 
-                    <p>Konsumiert: {{getStatisticValue(drink).value}}</p>
+                <p>Konsumiert: {{getStatisticValue(drink).value}}</p>
 
-                    <p>Bestraft: {{getStatisticValue(drink).penalty}}</p>
+                <p>Bestraft: {{getStatisticValue(drink).penalty}}</p>
 
-                    <div class="divider"></div>
-                    <p>Gesamt: {{getStatisticValue(drink).value + getStatisticValue(drink).penalty}}</p>
-                </div>
+                <div class="divider"></div>
+                <p>Gesamt: {{getStatisticValue(drink).value + getStatisticValue(drink).penalty}}</p>
             </div>
         </div>
-</div>
+    </div>
 </div>
 </body>
 
@@ -77,13 +84,13 @@
 
         var chart = new CanvasJS.Chart("chartContainer", {
             title: {
-                text: "BIX Kursübersicht"
+                text: "Dow Jones Kursübersicht"
             },
             axisX: {
-                title: "Uhrzeit",
+                title: "",
             },
             axisY: {
-                title: "Jones"
+                title: ""
             },
             data: [{
                 type: "line",
@@ -96,8 +103,8 @@
 
         var updateChart = function () {
             var xmlHttp = new XMLHttpRequest();
-            xmlHttp.onreadystatechange = function(){
-                if (xmlHttp.readyState == 4 && xmlHttp.status == 200){
+            xmlHttp.onreadystatechange = function () {
+                if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
                     yVal = JSON.parse(xmlHttp.responseText).value;
                     dps.push({x: xVal, y: yVal,});
 
@@ -108,7 +115,7 @@
                     xVal++;
                     // update chart after specified time.
 
-                    if (dps.length > 36000000) {
+                    if (dps.length > 360) {
                         dps.shift();
                     }
                 }
@@ -116,15 +123,18 @@
             xmlHttp.open("GET", "http://localhost:3000/currentStockValue", true);
             xmlHttp.send(null);
         };
+        updateChart()
+
         setInterval(function () {
             updateChart()
         }, updateInterval);
 
-        var updateStatistics = function(){
+        var updateStatistics = function () {
             angular.element(document.getElementById('chartContainer')).scope().updateStatistics();
         };
+        updateStatistics();
 
-        setInterval(function(){
+        setInterval(function () {
             updateStatistics()
         }, updateInterval);
 

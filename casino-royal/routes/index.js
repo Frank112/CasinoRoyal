@@ -91,7 +91,7 @@ router.post('/transaction', function(req, res, next){
     value: function(){
       var value = 0;
       if(req.body.isPenalty) {
-        value = req.body.drink.penalty * (1 + 0.5 * computeStockValue());
+        value = req.body.drink.penalty * (1 + 0.5 * (1 - computeStockValue()));
       }
       else {
         value = -req.body.drink.value * computeStockValue();
