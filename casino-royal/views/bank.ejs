@@ -17,13 +17,13 @@
     <div class=" panel panel-default col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
         <div class="panel-heading"><h1>Geldinfo</h1></div>
         <div class="panel-body">
-            <div class="row">
+            <div class="col-md-4">
                 Gesamt: <h3>{{moneyInfo.bank + moneyInfo.circulation}}</h3>
             </div>
-        <div class="row">
+        <div class="col-md-4">
             Bank: <h3>{{moneyInfo.bank}}</h3>
         </div>
-            <div class="row">
+            <div class="col-md-4">
             Im Umlauf: <h3>{{moneyInfo.circulation}}</h3>
         </div>
         </div>
@@ -56,12 +56,12 @@
                 Betrag: <input type="number" min="0" ng-model="directTransactionValue"/>
             </form>
             <div class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-4 col-sm-offset-1 col-xs-4 col-xs-offset-1">
-                <button type="button" class="btn btn-default" ng-click="makeDirectTransaction(false)" data-toggle="modal" data-target="#booking">
+                <button type="button" class="btn btn-default" ng-click="makeDirectTransaction(false)">
                     <span class="glyphicon glyphicon-plus"></span>
                 </button>
             </div>
             <div class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-4 col-sm-offset-1 col-xs-4 col-xs-offset-1">
-                <button type="button" class="btn btn-default" ng-click="makeDirectTransaction(true)" data-toggle="modal" data-target="#booking">
+                <button type="button" class="btn btn-default" ng-click="makeDirectTransaction(true)">
                     <span class="glyphicon glyphicon-minus"></span>
                 </button>
             </div>
@@ -78,7 +78,7 @@
                 <h4 class="modal-title">Buchung</h4>
             </div>
             <div class="modal-body">
-                <p>Wert: {{lastTransaction.value}}</p>
+                <jumbotron><h3>Wert der Buchung {{lastTransaction.value}}</h3></jumbotron>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
