@@ -23,17 +23,6 @@
         <div class="panel-footer"><p>Zeigt den Kurs der letzten 60 Minuten</p></div>
     </div>
     <div class=" panel panel-default col-md-3 col-md-offset-1 col-lg-3 col-lg-offset-1">
-<<<<<<< HEAD
-        <div class="panel-heading"><h1>Handelspreis</h1></div>
-        <div class="panel-body" ng-repeat="drink in drinks">
-            <h4>{{drink.name}}</h4>
-            <div class="row">
-                <div class="col-md-4">
-                    <h2><span class="label label-success">{{(drink.value * currentStockValue) | moneyRound}}</span></h2>
-                </div>
-                <div class="col-md-4 col-md-offset-4">
-                    <h2><span class="label label-danger">{{(drink.penalty * (1 + 0.5 * (1 - currentStockValue))) | moneyRound}}</span></h2>
-=======
         <div class="panel-heading"><h1>Handelspreis</h1><p>Grün: Verzehr, Rot: Strafe</p></div>
         <div class="panel-body">
             <div ng-repeat="drink in drinks">
@@ -45,7 +34,6 @@
                     <div class="col-md-4 col-md-offset-4">
                         <h2><span class="label label-danger">{{(drink.penalty * (1 + 0.5 * (1 - currentStockValue))) | moneyRound}}</span></h2>
                     </div>
->>>>>>> origin/master
                 </div>
             </div>
         </div>
